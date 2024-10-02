@@ -1,6 +1,6 @@
 ﻿namespace ClubDeportivo
 {
-    partial class Form1
+    partial class frmInicioSesion
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,12 +28,75 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInicioSesion));
+            btnIngresar = new Button();
+            pictureBox1 = new PictureBox();
+            txtUsuario = new TextBox();
+            txtClave = new TextBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
+            // 
+            // btnIngresar
+            // 
+            btnIngresar.Location = new Point(392, 254);
+            btnIngresar.Name = "btnIngresar";
+            btnIngresar.Size = new Size(209, 91);
+            btnIngresar.TabIndex = 0;
+            btnIngresar.Text = "INGRESAR";
+            btnIngresar.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(59, 70);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(229, 275);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
+            // txtUsuario
+            // 
+            txtUsuario.Location = new Point(392, 100);
+            txtUsuario.Name = "txtUsuario";
+            txtUsuario.Size = new Size(209, 27);
+            txtUsuario.TabIndex = 2;
+            txtUsuario.Text = "USUARIO";
+            txtUsuario.Enter += txtUsuario_Enter;
+            txtUsuario.Leave += txtUsuario_Leave;
+            // 
+            // txtClave
+            // 
+            txtClave.Location = new Point(392, 161);
+            txtClave.Name = "txtClave";
+            txtClave.Size = new Size(209, 27);
+            txtClave.TabIndex = 3;
+            txtClave.Text = "CONTRASEÑA";
+            txtClave.Enter += txtClave_Enter;
+            txtClave.Leave += txtClave_Leave;
+            // 
+            // frmInicioSesion
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(txtClave);
+            Controls.Add(txtUsuario);
+            Controls.Add(pictureBox1);
+            Controls.Add(btnIngresar);
+            Name = "frmInicioSesion";
+            Text = "ClubDeportivo";
+            Load += frmInicioSesion_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Button btnIngresar;
+        private PictureBox pictureBox1;
+        private TextBox txtUsuario;
+        private TextBox txtClave;
     }
 }

@@ -1,3 +1,5 @@
+using System.Data;
+
 namespace ClubDeportivo
 {
     public partial class frmInicioSesion : Form
@@ -49,6 +51,30 @@ namespace ClubDeportivo
                 txtClave.Text = "CONTRASEÑA";
                 txtClave.ForeColor = Color.Silver;
                 txtClave.UseSystemPasswordChar = false;
+            }
+        }
+
+        private void btnIngresar_Click(object sender, EventArgs e)
+        {
+            if (txtUsuario.Text == "USUARIO" || txtClave.Text == "CONTRASEÑA")
+            {
+                MessageBox.Show("Ingrese usuario y contraseña", "Club Deportivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DataTable tablaLogin = new DataTable();
+            Datos.Usuarios usuarios = new Datos.Usuarios();
+            tablaLogin = usuarios.LoginUsuario(txtUsuario.Text, txtClave.Text);
+            if (tablaLogin.Rows.Count > 0)
+            {
+                MessageBox.Show("Bienvenido al sistema", "Club Deportivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                frmPrincipal principal = new frmPrincipal();
+                principal.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Usuario o contraseña incorrecta", "Club Deportivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

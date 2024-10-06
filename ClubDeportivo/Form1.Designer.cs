@@ -44,6 +44,7 @@
             btnIngresar.TabIndex = 0;
             btnIngresar.Text = "INGRESAR";
             btnIngresar.UseVisualStyleBackColor = true;
+            btnIngresar.Click += btnIngresar_Click;
             // 
             // pictureBox1
             // 
@@ -84,6 +85,7 @@
             Controls.Add(txtUsuario);
             Controls.Add(pictureBox1);
             Controls.Add(btnIngresar);
+            MaximizeBox = false;
             Name = "frmInicioSesion";
             Text = "ClubDeportivo";
             Load += frmInicioSesion_Load;

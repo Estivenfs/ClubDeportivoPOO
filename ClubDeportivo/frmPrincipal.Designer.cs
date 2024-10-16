@@ -28,18 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            btnSalir = new Button();
             SuspendLayout();
+            // 
+            // btnSalir
+            // 
+            btnSalir.Location = new Point(694, 12);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(94, 29);
+            btnSalir.TabIndex = 0;
+            btnSalir.Text = "Salir";
+            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.Click += btnSalir_Click;
             // 
             // frmPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnSalir);
             Name = "frmPrincipal";
             Text = "Administracion";
             ResumeLayout(false);
         }
 
         #endregion
+
+        private Button btnSalir;
     }
 }

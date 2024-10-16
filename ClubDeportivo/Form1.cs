@@ -69,6 +69,8 @@ namespace ClubDeportivo
             {
                 MessageBox.Show("Bienvenido al sistema", "Club Deportivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 frmPrincipal principal = new frmPrincipal();
+                principal.rol= Convert.ToString(tablaLogin.Rows[0][0]);
+                principal.usuario = Convert.ToString(txtUsuario.Text);
                 principal.Show();
                 this.Hide();
             }

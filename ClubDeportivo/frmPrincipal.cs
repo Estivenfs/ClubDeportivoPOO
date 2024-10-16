@@ -16,5 +16,12 @@ namespace ClubDeportivo
         {
             InitializeComponent();
         }
+
+        internal string? rol;
+        internal string? usuario;
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -57,7 +57,7 @@ CREATE TABLE cuotas(
     FOREIGN KEY (idCliente) REFERENCES clientes(idCliente)
 );
 INSERT INTO usuarios (NombreUsuario,PasswordUsuario,RolUsuario) values 
-("Estiven","123456",1);
+("admin","admin",1);
 
 
 delimiter //  
@@ -80,7 +80,7 @@ begin
 end 
 //
 
-create procedure NuevoCliente(in Nom varchar(20),in Ape varchar(20),in dni int, in aptoFisico bool, esSocio bool, out rta int)
+create procedure NuevoCliente(in Nom varchar(20),in Ape varchar(20),in clientDni int, in aptoFisico bool, esSocio bool, out rta int)
  begin
 	 declare existe int default 0;
     
@@ -88,10 +88,10 @@ create procedure NuevoCliente(in Nom varchar(20),in Ape varchar(20),in dni int, 
 		/* ---------------------------------------------------------
 			para saber si ya esta almacenado el postulante
 		------------------------------------------------------- */	
-		set existe = (select idCliente from clientes where dni = dni );
+		set existe = (select idCliente from clientes where dni = clientDni );
 	 
 	  if existe is null then	 
-		 insert into clientes(nombre,apellido,dni,aptoFisico,esSocio) values(Nom,Ape,dni,aptoFisico,esSocio);
+		 insert into clientes(nombre,apellido,dni,aptoFisico,esSocio) values(Nom,Ape,clientDni,aptoFisico,esSocio);
 		 set rta  =  (SELECT LAST_INSERT_ID());
 	  else
 		 set rta = -1;

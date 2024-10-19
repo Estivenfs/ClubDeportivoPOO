@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             btnSalir = new Button();
+            lblUser = new Label();
+            btnRegistrarCliente = new Button();
             SuspendLayout();
             // 
             // btnSalir
@@ -36,24 +38,50 @@
             btnSalir.Location = new Point(694, 12);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(94, 29);
-            btnSalir.TabIndex = 0;
+            btnSalir.TabIndex = 5;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.Click += btnSalir_Click;
+            // 
+            // lblUser
+            // 
+            lblUser.AutoSize = true;
+            lblUser.Font = new Font("Stencil", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblUser.Location = new Point(12, 16);
+            lblUser.Name = "lblUser";
+            lblUser.Size = new Size(70, 27);
+            lblUser.TabIndex = 1;
+            lblUser.Text = "User";
+            // 
+            // btnRegistrarCliente
+            // 
+            btnRegistrarCliente.Location = new Point(53, 143);
+            btnRegistrarCliente.Name = "btnRegistrarCliente";
+            btnRegistrarCliente.Size = new Size(280, 74);
+            btnRegistrarCliente.TabIndex = 1;
+            btnRegistrarCliente.Text = "REGISTRAR CLIENTE";
+            btnRegistrarCliente.UseVisualStyleBackColor = true;
+            btnRegistrarCliente.Click += btnRegistrarCliente_Click;
             // 
             // frmPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnRegistrarCliente);
+            Controls.Add(lblUser);
             Controls.Add(btnSalir);
             Name = "frmPrincipal";
             Text = "Administracion";
+            Load += frmPrincipal_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button btnSalir;
+        private Label lblUser;
+        private Button btnRegistrarCliente;
     }
 }

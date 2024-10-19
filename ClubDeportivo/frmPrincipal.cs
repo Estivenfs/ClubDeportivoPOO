@@ -23,5 +23,21 @@ namespace ClubDeportivo
         {
             Application.Exit();
         }
+
+        private void frmPrincipal_Load(object sender, EventArgs e)
+        {
+            if (usuario != null)
+            {
+                lblUser.Text = usuario;
+            }
+            btnRegistrarCliente.Focus();
+        }
+
+        private void btnRegistrarCliente_Click(object sender, EventArgs e)
+        {
+            frmRegistroCliente frmRegistro = new frmRegistroCliente();
+            frmRegistro.ShowDialog();
+
+        }
     }
 }

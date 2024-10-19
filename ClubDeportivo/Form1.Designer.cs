@@ -41,7 +41,7 @@
             btnIngresar.Location = new Point(392, 254);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(209, 91);
-            btnIngresar.TabIndex = 0;
+            btnIngresar.TabIndex = 4;
             btnIngresar.Text = "INGRESAR";
             btnIngresar.UseVisualStyleBackColor = true;
             btnIngresar.Click += btnIngresar_Click;

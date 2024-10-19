@@ -31,6 +31,7 @@ namespace ClubDeportivo
         {
             txtUsuario.ForeColor = Color.Silver;
             txtClave.ForeColor = Color.Silver;
+            txtUsuario.Focus();
 
         }
 
@@ -64,7 +65,17 @@ namespace ClubDeportivo
 
             DataTable tablaLogin = new DataTable();
             Datos.Usuarios usuarios = new Datos.Usuarios();
-            tablaLogin = usuarios.LoginUsuario(txtUsuario.Text, txtClave.Text);
+            try
+            {
+
+                tablaLogin = usuarios.LoginUsuario(txtUsuario.Text, txtClave.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al intentar ingresar al sistema: " + ex.Message, "Club Deportivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
             if (tablaLogin.Rows.Count > 0)
             {
                 MessageBox.Show("Bienvenido al sistema", "Club Deportivo", MessageBoxButtons.OK, MessageBoxIcon.Information);

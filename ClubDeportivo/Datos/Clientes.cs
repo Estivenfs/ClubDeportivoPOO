@@ -11,7 +11,7 @@ namespace ClubDeportivo.Datos
     internal class Clientes
     {
         
-        public string Registrar_Cliente(Entidades.E_Cliente cliente)
+        public string completarInscripcion(Entidades.E_Cliente cliente)
         {
             string? salida;
             MySqlConnection sqlCon = new MySqlConnection();
@@ -20,9 +20,9 @@ namespace ClubDeportivo.Datos
                 sqlCon = Conexion.getInstancia().getConexion();
                 MySqlCommand comando = new MySqlCommand("NuevoCliente",sqlCon);
                 comando.CommandType = CommandType.StoredProcedure;
-                comando.Parameters.AddWithValue("@nombre", cliente.nombre);
-                comando.Parameters.AddWithValue("@apellido", cliente.apellido);
-                comando.Parameters.AddWithValue("@dni", cliente.dni);
+                comando.Parameters.AddWithValue("@nom", cliente.nombre);
+                comando.Parameters.AddWithValue("@ape", cliente.apellido);
+                comando.Parameters.AddWithValue("@clientDni", cliente.dni);
                 comando.Parameters.AddWithValue("@aptoFisico", cliente.aptoFisico);
                 comando.Parameters.AddWithValue("@esSocio", cliente.esSocio);
 

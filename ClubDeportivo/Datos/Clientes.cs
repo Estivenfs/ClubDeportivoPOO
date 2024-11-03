@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using ClubDeportivo.Entidades;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +11,13 @@ namespace ClubDeportivo.Datos
 {
     internal class Clientes
     {
-        
+        public int idCliente;
+        public string nombre;
+        public string apellido;
+        public int dni;
+        public bool aptoFisico;
+        public bool esSocio;
+
         public string completarInscripcion(Entidades.E_Cliente cliente)
         {
             string? salida;
@@ -48,6 +55,41 @@ namespace ClubDeportivo.Datos
                 }
             }
             return salida;
+        }
+
+        public bool actualizarCliente(Entidades.E_Cliente cliente)
+        {
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().getConexion();
+                string query = $"UPDATE cliente SET nombre = {cliente.nombre}, apellido = {cliente.apellido}" +
+                    $", dni = {cliente.dni}, aptoFisico = {cliente.aptoFisico}, esSocio = {cliente.esSocio}"+
+                    $" WHERE idCliente = {cliente.idCliente}";
+                MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                sqlCon.Open();
+                comando.ExecuteNonQuery();
+
+                if (comando.ExecuteNonQuery() == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
         }
     }
 }

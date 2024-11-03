@@ -34,7 +34,7 @@ CREATE TABLE actividades(
 	codActividad int auto_increment PRIMARY KEY,
     nombre varchar(30),
     precio float,
-    horario time,
+    horario datetime,
     cupo int,
     cupoDisponible int
 );

@@ -11,7 +11,7 @@ namespace ClubDeportivo.Entidades
         public int idCliente { get; set; }
         public  string? nombre { get; set; }
         public  string? apellido { get; set; }
-        public int? dni { get; set; }
+        public int dni { get; set; }
         public bool aptoFisico { get; set; }
         public bool esSocio { get; set; }
     }

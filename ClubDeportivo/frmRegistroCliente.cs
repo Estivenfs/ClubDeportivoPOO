@@ -266,7 +266,15 @@ namespace ClubDeportivo
                 cliente.aptoFisico = chckAptoFisico.Checked;
                 cliente.esSocio = chckEsSocio.Checked;
 
-                Datos.Clientes datos = new Datos.Clientes();
+                Datos.Clientes datos;
+                if(cliente.esSocio)
+                {
+                    datos = new Datos.Socio();
+                }
+                else
+                {
+                    datos = new Datos.NoSocio();
+                }
                 string? respuesta = datos.completarInscripcion(cliente);
                 if (respuesta == "-1")
                 {

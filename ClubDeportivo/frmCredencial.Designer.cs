@@ -35,11 +35,9 @@
             lblTextDni = new Label();
             lblNombre = new Label();
             lblApellido = new Label();
-            LblDni = new Label();
-            pictureBox2 = new PictureBox();
+            lblDni = new Label();
             btnImprimir = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -118,26 +116,16 @@
             lblApellido.TabIndex = 6;
             lblApellido.Text = "PEREZ";
             // 
-            // LblDni
+            // lblDni
             // 
-            LblDni.AutoSize = true;
-            LblDni.BackColor = Color.White;
-            LblDni.Font = new Font("Palatino Linotype", 12F, FontStyle.Bold);
-            LblDni.Location = new Point(439, 240);
-            LblDni.Name = "LblDni";
-            LblDni.Size = new Size(92, 27);
-            LblDni.TabIndex = 7;
-            LblDni.Text = "95852748";
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.Diseño_sin_título;
-            pictureBox2.Location = new Point(-1, -1);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(800, 450);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 8;
-            pictureBox2.TabStop = false;
+            lblDni.AutoSize = true;
+            lblDni.BackColor = Color.White;
+            lblDni.Font = new Font("Palatino Linotype", 12F, FontStyle.Bold);
+            lblDni.Location = new Point(439, 240);
+            lblDni.Name = "lblDni";
+            lblDni.Size = new Size(92, 27);
+            lblDni.TabIndex = 7;
+            lblDni.Text = "95852748";
             // 
             // btnImprimir
             // 
@@ -147,14 +135,17 @@
             btnImprimir.TabIndex = 9;
             btnImprimir.Text = "Imprimir";
             btnImprimir.UseVisualStyleBackColor = true;
+            btnImprimir.Click += btnImprimir_Click;
             // 
             // frmCredencial
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.Diseño_sin_título;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
             Controls.Add(btnImprimir);
-            Controls.Add(LblDni);
+            Controls.Add(lblDni);
             Controls.Add(lblApellido);
             Controls.Add(lblNombre);
             Controls.Add(lblTextDni);
@@ -162,11 +153,11 @@
             Controls.Add(lblTextNombre);
             Controls.Add(lblCredencial);
             Controls.Add(pictureBox1);
-            Controls.Add(pictureBox2);
+            DoubleBuffered = true;
             Name = "frmCredencial";
-            Text = "frmCredencial";
+            Text = "Credencial";
+            Load += frmCredencial_Load_1;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -180,8 +171,7 @@
         private Label lblTextDni;
         private Label lblNombre;
         private Label lblApellido;
-        private Label LblDni;
-        private PictureBox pictureBox2;
+        private Label lblDni;
         private Button btnImprimir;
     }
 }

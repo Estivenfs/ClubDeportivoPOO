@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClubDeportivo.Datos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,6 +36,7 @@ namespace ClubDeportivo
             btnVolverRegistro = new Button();
             chckEsSocio = new CheckBox();
             lblEsSocio = new Label();
+            btnVerCredencial = new Button();
             SuspendLayout();
             // 
             // lblRegistroCliente
@@ -120,7 +122,7 @@ namespace ClubDeportivo
             // 
             // btnRegistrar
             // 
-            btnRegistrar.Location = new Point(377, 285);
+            btnRegistrar.Location = new Point(285, 282);
             btnRegistrar.Name = "btnRegistrar";
             btnRegistrar.Size = new Size(221, 67);
             btnRegistrar.TabIndex = 10;
@@ -169,9 +171,21 @@ namespace ClubDeportivo
             lblEsSocio.TabIndex = 12;
             lblEsSocio.Text = "Es Socio";
             // 
+            // btnVerCredencial
+            // 
+            btnVerCredencial.Location = new Point(524, 284);
+            btnVerCredencial.Name = "btnVerCredencial";
+            btnVerCredencial.Size = new Size(146, 62);
+            btnVerCredencial.TabIndex = 13;
+            btnVerCredencial.Text = "VER CREDENCIAL";
+            btnVerCredencial.UseVisualStyleBackColor = true;
+            btnVerCredencial.Visible = false;
+            btnVerCredencial.Click += btnVerCredencial_Click;
+            // 
             // frmRegistroCliente
             // 
             ClientSize = new Size(773, 414);
+            Controls.Add(btnVerCredencial);
             Controls.Add(chckEsSocio);
             Controls.Add(lblEsSocio);
             Controls.Add(btnVolverRegistro);
@@ -207,12 +221,14 @@ namespace ClubDeportivo
         private Button btnVolverRegistro;
         private CheckBox chckEsSocio;
         private Label lblEsSocio;
+        private Button btnVerCredencial;
         private Label lblAptoFisico;
 
         private void frmRegistroCliente_Load(object sender, EventArgs e)
         {
             toolTipLimpiarDatos.SetToolTip(btnLimpiar, "Limpiar Datos");
             txtNombre.Focus();
+            btnVerCredencial.Visible = false;
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -223,6 +239,7 @@ namespace ClubDeportivo
             chckAptoFisico.Checked = false;
             chckEsSocio.Checked = false;
             txtNombre.Focus();
+            btnVerCredencial.Visible = false;
         }
 
         private void txtDni_KeyPress(object sender, KeyPressEventArgs e)
@@ -267,7 +284,7 @@ namespace ClubDeportivo
                 cliente.esSocio = chckEsSocio.Checked;
 
                 Datos.Clientes datos;
-                if(cliente.esSocio)
+                if (cliente.esSocio)
                 {
                     datos = new Datos.Socio();
                 }
@@ -283,7 +300,25 @@ namespace ClubDeportivo
                 else
                 {
                     MessageBox.Show("Cliente registrado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    btnLimpiar_Click(null, e);
+                    cliente.idCliente = Convert.ToInt32(respuesta);
+                    Clientes pagoCliente = new Clientes() { 
+                        idCliente = cliente.idCliente,
+                        nombre = cliente.nombre,
+                        apellido = cliente.apellido,
+                        dni = cliente.dni,
+                        aptoFisico = cliente.aptoFisico,
+                        esSocio = cliente.esSocio
+                    };
+                    frmRegistroPago frmRegistroPago = new frmRegistroPago();
+                    frmRegistroPago.clientes = pagoCliente;
+                    frmRegistroPago.ShowDialog();
+
+                    if (cliente.esSocio)
+                    {
+                        //btnVerCredencial_Click(null, e);
+                        btnVerCredencial.Visible = true;
+                    }
+                    
                 }
 
             }
@@ -306,6 +341,15 @@ namespace ClubDeportivo
             {
                 chckEsSocio.Checked = false;
             }
+        }
+
+        private void btnVerCredencial_Click(object sender, EventArgs e)
+        {
+            frmCredencial frmCredencial = new frmCredencial();
+            frmCredencial.nombre = txtNombre.Text;
+            frmCredencial.apellido = txtApellido.Text;
+            frmCredencial.dni = txtDni.Text;
+            frmCredencial.ShowDialog();
         }
     }
 }

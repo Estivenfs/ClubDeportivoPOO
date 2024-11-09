@@ -13,7 +13,7 @@ namespace ClubDeportivo.Datos
     {
         public int idCuota { get; set; }
         public DateTime fechaUltimoPago { get; set; }
-        public DateTime fechaVencimiento { get; set; }
+        public DateTime? fechaVencimiento { get; set; }
         public float monto { get; set; }
         public bool pagado { get; set; }
         public int idSocio { get; set; }
@@ -60,5 +60,45 @@ namespace ClubDeportivo.Datos
             }
 
         }
+
+        public bool insertarCuota(E_Cuota cuota)
+        {
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().getConexion();
+
+                // Construir la consulta SQL con parámetros
+                string query = "INSERT INTO cuotas (fechaUltimoPago, fechaVencimiento, valorCuota, idCliente) " +
+                               "VALUES (@fechaUltimoPago, @fechaVencimiento, @valorCuota, @idCliente)";
+
+                MySqlCommand comando = new MySqlCommand(query, sqlCon);
+
+                // Agregar los parámetros con los valores de la cuota
+                comando.Parameters.AddWithValue("@fechaUltimoPago", cuota.fechaUltimoPago);
+                comando.Parameters.AddWithValue("@fechaVencimiento", cuota.fechaVencimiento);
+                comando.Parameters.AddWithValue("@valorCuota", cuota.valorCuota);
+                comando.Parameters.AddWithValue("@idCliente", cuota.idCliente);
+
+                // Abrir la conexión y ejecutar la consulta
+                sqlCon.Open();
+                int filasAfectadas = comando.ExecuteNonQuery();
+
+                // Verificar si se insertó correctamente
+                return filasAfectadas > 0;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+        }
+
     }
 }

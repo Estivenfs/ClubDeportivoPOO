@@ -31,6 +31,7 @@
             btnSalir = new Button();
             lblUser = new Label();
             btnRegistrarCliente = new Button();
+            btnRegistrarPago = new Button();
             SuspendLayout();
             // 
             // btnSalir
@@ -63,11 +64,22 @@
             btnRegistrarCliente.UseVisualStyleBackColor = true;
             btnRegistrarCliente.Click += btnRegistrarCliente_Click;
             // 
+            // btnRegistrarPago
+            // 
+            btnRegistrarPago.Location = new Point(355, 143);
+            btnRegistrarPago.Name = "btnRegistrarPago";
+            btnRegistrarPago.Size = new Size(280, 74);
+            btnRegistrarPago.TabIndex = 6;
+            btnRegistrarPago.Text = "REGISTRAR PAGO";
+            btnRegistrarPago.UseVisualStyleBackColor = true;
+            btnRegistrarPago.Click += btnRegistrarPago_Click;
+            // 
             // frmPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnRegistrarPago);
             Controls.Add(btnRegistrarCliente);
             Controls.Add(lblUser);
             Controls.Add(btnSalir);
@@ -83,5 +95,6 @@
         private Button btnSalir;
         private Label lblUser;
         private Button btnRegistrarCliente;
+        private Button btnRegistrarPago;
     }
 }

@@ -82,10 +82,17 @@ namespace ClubDeportivo
         {
             string busqueda = txtBusqueda.Text;
             Clientes cliente = new Clientes();
-            Clientes clientes = cliente.BuscarCliente(busqueda);
-            if (clientes != null)
+            try
             {
-                this.clientes = clientes;
+                cliente = cliente.BuscarCliente(busqueda);
+            }catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar cliente: " + ex.Message, "Club Deportivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (cliente.idCliente > 0)
+            {
+                this.clientes = cliente;
                 lblNombreCliente.Text = clientes.nombre + " " + clientes.apellido;
                 if (clientes.esSocio)
                 {
@@ -119,7 +126,7 @@ namespace ClubDeportivo
             }
 
             int idCliente = clientes.idCliente;
-            string tipoPago = rdbDebito.Checked ? "Debito" : "Credito";
+            string tipoPago = rdbDebito.Checked ? "TARJETA_DEBITO" : "TARJETA_CREDITO";
             float monto = float.Parse(txtMonto.Text);
             DateOnly fechaPago = DateOnly.FromDateTime(DateTime.Now);
             DateTime? fechaVencimiento;
@@ -137,7 +144,8 @@ namespace ClubDeportivo
                 fechaUltimoPago = fechaPago.ToDateTime(TimeOnly.MinValue),
                 fechaVencimiento = (DateTime)fechaVencimiento,              
                 valorCuota = monto,
-                idCliente = idCliente
+                idCliente = idCliente,
+                formaPago = tipoPago
             };
 
             Cuota cuotas = new Cuota();

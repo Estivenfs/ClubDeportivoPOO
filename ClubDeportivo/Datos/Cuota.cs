@@ -69,8 +69,8 @@ namespace ClubDeportivo.Datos
                 sqlCon = Conexion.getInstancia().getConexion();
 
                 // Construir la consulta SQL con parámetros
-                string query = "INSERT INTO cuotas (fechaUltimoPago, fechaVencimiento, valorCuota, idCliente) " +
-                               "VALUES (@fechaUltimoPago, @fechaVencimiento, @valorCuota, @idCliente)";
+                string query = "INSERT INTO cuotas (fechaUltimoPago, fechaVencimiento, valorCuota, idCliente, formaPago) " +
+                               "VALUES (@fechaUltimoPago, @fechaVencimiento, @valorCuota, @idCliente, @formaPago)";
 
                 MySqlCommand comando = new MySqlCommand(query, sqlCon);
 
@@ -79,6 +79,7 @@ namespace ClubDeportivo.Datos
                 comando.Parameters.AddWithValue("@fechaVencimiento", cuota.fechaVencimiento);
                 comando.Parameters.AddWithValue("@valorCuota", cuota.valorCuota);
                 comando.Parameters.AddWithValue("@idCliente", cuota.idCliente);
+                comando.Parameters.AddWithValue("@formaPago", cuota.formaPago);
 
                 // Abrir la conexión y ejecutar la consulta
                 sqlCon.Open();

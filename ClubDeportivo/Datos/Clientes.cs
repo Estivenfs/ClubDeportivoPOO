@@ -127,7 +127,7 @@ namespace ClubDeportivo.Datos
         {
             MySqlConnection sqlCon = new MySqlConnection();
             List<Clientes> clientes = new List<Clientes>();
-
+            sqlCon = Conexion.getInstancia().getConexion();
             // Determinar si el criterio es numérico (DNI) o texto (nombre/apellido)
             string consultaSQL;
             MySqlCommand cmd;

@@ -221,7 +221,9 @@ namespace ClubDeportivo.Datos
                     Text = "Seleccionar",
                     Dock = DockStyle.Bottom
                 };
-
+                listBox.Height = seleccionForm.Height - selectButton.Height-20;
+                listBox.AutoScrollOffset = new System.Drawing.Point(0, 0);
+                selectButton.Height = 30;
                 seleccionForm.Controls.Add(listBox);
                 seleccionForm.Controls.Add(selectButton);
 

@@ -57,6 +57,15 @@ namespace ClubDeportivo
                 {
                     cmbActividades.Visible = true;
                     lblActividades.Visible = true;
+                    List<E_Actividad> actividades = Actividad.listarActividades();
+                    cmbActividades.DataSource = actividades;
+                    cmbActividades.DisplayMember = "nombre";
+                    cmbActividades.ValueMember = "codActividad";
+                    cmbActividades.SelectedIndex = 0;
+
+                    txtMonto.Text = actividades[0].precio.ToString();
+
+
                 }
 
             }
@@ -85,7 +94,13 @@ namespace ClubDeportivo
             try
             {
                 cliente = cliente.BuscarCliente(busqueda);
-            }catch (Exception ex)
+                if (cliente == null)
+                {
+                    MessageBox.Show("No se encontró ningún cliente con los datos ingresados.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Error al buscar cliente: " + ex.Message, "Club Deportivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -103,6 +118,13 @@ namespace ClubDeportivo
                 {
                     cmbActividades.Visible = true;
                     lblActividades.Visible = true;
+                    List<E_Actividad> actividades = Actividad.listarActividades();
+                    cmbActividades.DataSource = actividades;
+                    cmbActividades.DisplayMember = "nombre";
+                    cmbActividades.ValueMember = "codActividad";
+                    cmbActividades.SelectedIndex = 0;
+
+                    txtMonto.Text = actividades[0].precio.ToString();
                 }
             }
             else
@@ -127,7 +149,20 @@ namespace ClubDeportivo
 
             int idCliente = clientes.idCliente;
             string tipoPago = rdbDebito.Checked ? "TARJETA_DEBITO" : "TARJETA_CREDITO";
+
+            if (txtMonto.Text == "")
+            {
+                MessageBox.Show("Debe ingresar el monto a pagar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             float monto = float.Parse(txtMonto.Text);
+
+            if (monto <= 0)
+            {
+                MessageBox.Show("El monto a pagar debe ser mayor a cero.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             DateOnly fechaPago = DateOnly.FromDateTime(DateTime.Now);
             DateTime? fechaVencimiento;
             if (clientes.esSocio)
@@ -137,12 +172,19 @@ namespace ClubDeportivo
             else
             {
                 fechaVencimiento = null;
+                NoSocio noSocio = new NoSocio();
+                int codActividad = ((E_Actividad)cmbActividades.SelectedItem).codActividad;
+                bool result = noSocio.registrarActividad(codActividad, idCliente);
+                if(!result) {
+                  
+                    return;
+                }
             }
 
             E_Cuota cuota = new E_Cuota()
             {
                 fechaUltimoPago = fechaPago.ToDateTime(TimeOnly.MinValue),
-                fechaVencimiento = (DateTime)fechaVencimiento,              
+                fechaVencimiento = fechaVencimiento,
                 valorCuota = monto,
                 idCliente = idCliente,
                 formaPago = tipoPago
@@ -150,7 +192,12 @@ namespace ClubDeportivo
 
             Cuota cuotas = new Cuota();
             bool resultado = cuotas.insertarCuota(cuota);
-            if (resultado) {
+            if (resultado)
+            {
+                if (!clientes.esSocio)
+                {
+                   
+                }
                 MessageBox.Show("El pago se registró correctamente.", "Club Deportivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
@@ -158,6 +205,29 @@ namespace ClubDeportivo
             {
                 MessageBox.Show("Ocurrió un error al intentar registrar el pago.", "Club Deportivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void txtMonto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Obtiene el carácter decimal de la cultura actual
+            char decimalSeparator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
+
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != decimalSeparator)
+            {
+                e.Handled = true; // Cancela el evento si no cumple las condiciones
+            }
+
+            // Evita más de un separador decimal
+            if (e.KeyChar == decimalSeparator && txtMonto.Text.Contains(decimalSeparator))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cmbActividades_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtMonto.Text = ((E_Actividad)cmbActividades.SelectedItem).precio.ToString();
         }
     }
 }

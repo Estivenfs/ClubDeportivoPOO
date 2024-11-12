@@ -10,9 +10,9 @@ namespace ClubDeportivo.Datos
     internal class NoSocio : Clientes
     {
 
-        public bool pagarActividad()
+        public bool registrarActividad(int idActividad, int idCliente)
         {
-            return true;
+            return Actividad.inscribirActividad(idActividad, idCliente);
         }
 
         private List<NoSocio> listarNoSocios()

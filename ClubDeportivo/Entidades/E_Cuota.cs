@@ -13,7 +13,7 @@ namespace ClubDeportivo.Entidades
         public DateTime fechaUltimoPago { get; set; }
         public float valorCuota { get; set; }
         public string formaPago { get; set; }
-        public DateTime fechaVencimiento { get; set; }
+        public DateTime? fechaVencimiento { get; set; }
         public int idCliente { get; set; }
         
     

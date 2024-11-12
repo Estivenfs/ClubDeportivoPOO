@@ -88,6 +88,7 @@
             cmbActividades.Size = new Size(288, 28);
             cmbActividades.TabIndex = 4;
             cmbActividades.Text = "Seleccione";
+            cmbActividades.SelectedIndexChanged += cmbActividades_SelectedIndexChanged;
             // 
             // rdbDebito
             // 
@@ -159,6 +160,7 @@
             txtMonto.Name = "txtMonto";
             txtMonto.Size = new Size(288, 27);
             txtMonto.TabIndex = 11;
+            txtMonto.KeyPress += txtMonto_KeyPress;
             // 
             // frmRegistroPago
             // 

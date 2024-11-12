@@ -141,9 +141,9 @@
             lblNombreCliente.AutoSize = true;
             lblNombreCliente.Location = new Point(45, 231);
             lblNombreCliente.Name = "lblNombreCliente";
-            lblNombreCliente.Size = new Size(86, 20);
+            lblNombreCliente.Size = new Size(45, 20);
             lblNombreCliente.TabIndex = 9;
-            lblNombreCliente.Text = "Pedro Perez";
+            lblNombreCliente.Text = "         ";
             // 
             // lblMonto
             // 

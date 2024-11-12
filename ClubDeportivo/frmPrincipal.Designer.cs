@@ -32,6 +32,7 @@
             lblUser = new Label();
             btnRegistrarCliente = new Button();
             btnRegistrarPago = new Button();
+            btnVencimientos = new Button();
             SuspendLayout();
             // 
             // btnSalir
@@ -74,11 +75,22 @@
             btnRegistrarPago.UseVisualStyleBackColor = true;
             btnRegistrarPago.Click += btnRegistrarPago_Click;
             // 
+            // btnVencimientos
+            // 
+            btnVencimientos.Location = new Point(53, 247);
+            btnVencimientos.Name = "btnVencimientos";
+            btnVencimientos.Size = new Size(280, 74);
+            btnVencimientos.TabIndex = 7;
+            btnVencimientos.Text = "VER VENCIMIENTOS";
+            btnVencimientos.UseVisualStyleBackColor = true;
+            btnVencimientos.Click += btnVencimientos_Click;
+            // 
             // frmPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnVencimientos);
             Controls.Add(btnRegistrarPago);
             Controls.Add(btnRegistrarCliente);
             Controls.Add(lblUser);
@@ -96,5 +108,6 @@
         private Label lblUser;
         private Button btnRegistrarCliente;
         private Button btnRegistrarPago;
+        private Button btnVencimientos;
     }
 }

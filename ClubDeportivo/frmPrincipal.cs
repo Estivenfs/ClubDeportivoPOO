@@ -45,5 +45,11 @@ namespace ClubDeportivo
             frmRegistroPago frmRegistro = new frmRegistroPago();
             frmRegistro.ShowDialog();
         }
+
+        private void btnVencimientos_Click(object sender, EventArgs e)
+        {
+            frmVencimientos frmVencimientos = new frmVencimientos();
+            frmVencimientos.ShowDialog();
+        }
     }
 }

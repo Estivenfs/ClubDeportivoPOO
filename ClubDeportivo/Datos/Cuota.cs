@@ -28,27 +28,37 @@ namespace ClubDeportivo.Datos
             MySqlConnection sqlCon = new MySqlConnection();
             try
             {
+                sqlCon = Conexion.getInstancia().getConexion();
                 sqlCon.Open();
-                string query = "SELECT * FROM cuotas WHERE fechaVencimiento = CURDATE()";
+                string query = "SELECT cu.idCuota, cu.fechaUltimoPago, cu.valorCuota, cu.formaPago, cu.fechaVencimiento," +
+                    "cl.idCliente, cl.nombre, cl.apellido, cl.dni, cl.aptoFisico, cl.esSocio " +
+                    "FROM cuotas cu JOIN clientes cl ON cu.idCliente = cl.idCliente WHERE cu.fechaVencimiento = CURDATE()";
                 MySqlCommand cmd = new MySqlCommand(query, sqlCon);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 List<E_Cuota_Cliente> cuotas = new List<E_Cuota_Cliente>();
                 while (reader.Read()) {
-                    E_Cuota_Cliente cuota = new E_Cuota_Cliente();
-                    cuota.cuota = new E_Cuota();
-                    cuota.cuota.idCuota = reader.GetInt32("idCuota");
-                    cuota.cuota.fechaUltimoPago = reader.GetDateTime("fechaUltimoPago");
-                    cuota.cuota.fechaVencimiento = reader.GetDateTime("fechaVencimiento");
-                    cuota.cuota.valorCuota = reader.GetFloat("valorCuota");
-                    cuota.cuota.formaPago = reader.GetString("formaPago");
-                    cuota.cuota.idCliente = reader.GetInt32("idCliente");
-                    cuotas.Add(cuota);
+                    E_Cuota_Cliente cuota_cliente = new E_Cuota_Cliente();
+                    cuota_cliente.cuota = new E_Cuota();
+                    cuota_cliente.cuota.idCuota = reader.GetInt32("idCuota");
+                    cuota_cliente.cuota.fechaUltimoPago = reader.GetDateTime("fechaUltimoPago");
+                    cuota_cliente.cuota.fechaVencimiento = reader.GetDateTime("fechaVencimiento");
+                    cuota_cliente.cuota.valorCuota = reader.GetFloat("valorCuota");
+                    cuota_cliente.cuota.formaPago = reader.GetString("formaPago");
+                    cuota_cliente.cuota.idCliente = reader.GetInt32("idCliente");
+                    cuota_cliente.cliente = new E_Cliente();
+                    cuota_cliente.cliente.idCliente = reader.GetInt32("idCliente");
+                    cuota_cliente.cliente.nombre = reader.GetString("nombre");
+                    cuota_cliente.cliente.apellido = reader.GetString("apellido");
+                    cuota_cliente.cliente.dni = reader.GetInt32("dni");
+                    cuota_cliente.cliente.aptoFisico = reader.GetBoolean("aptoFisico");
+                    cuota_cliente.cliente.esSocio = reader.GetBoolean("esSocio");
+                    cuotas.Add(cuota_cliente);
                 }
                 return cuotas;
                 
             }catch (Exception ex) {
-                throw new Exception("Error al intentar listar las cuotas vencidas: " + ex.Message);
-
+                MessageBox.Show("Error al intentar listar las cuotas: " + ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
             }
             finally
             {

@@ -9,9 +9,6 @@ namespace ClubDeportivo.Datos
     internal class Socio : Clientes
     {
         private int idSocio;
-        public bool pagarCuota()
-        {
-            return true;
-        }
+       
     }
 }

@@ -18,10 +18,6 @@ namespace ClubDeportivo.Datos
         public bool pagado { get; set; }
         public int idSocio { get; set; }
 
-        public bool actualizarFecha()
-        {
-            return true;
-        }
         
         public List<E_Cuota_Cliente> listarVencimientos()
         {
